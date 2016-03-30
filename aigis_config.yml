@@ -1,0 +1,10 @@
+name: PassStore StyleGuide
+source:
+    - ./public/css/sp/main.css
+
+template: ./aigisTemp #スタイルガイドのテンプレート読み込み先
+dest: ./aigis #スタイルガイドの吐き出し先
+
+
+# dependencies:
+#     - ./public/css #外部のCSSを取り込めるようになった

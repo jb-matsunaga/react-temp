@@ -1,0 +1,10 @@
+@charset 'UTF-8';
+
+// ===============================
+// パーシャルの読み込み
+// ===============================
+
+@import './foundation/reset';
+@import './tool/mixin';
+@import './tool/extend';
+@import './utility/utility';

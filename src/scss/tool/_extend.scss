@@ -1,0 +1,13 @@
+@charset 'UTF-8';
+
+// ===============================
+// clearfix
+// ===============================
+
+%clearfix {
+    &:after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+}
