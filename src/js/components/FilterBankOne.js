@@ -36,7 +36,8 @@ export default class FilterBankOneApp extends React.Component {
         console.log(props);
         super(props);
         this.state = {
-            data: props.data
+            data: props.data,
+            bank: 'bank'
         };
     }
     handleFilterVal(val) {
@@ -50,15 +51,31 @@ export default class FilterBankOneApp extends React.Component {
             data: line
         });
     }
+    handleClick(e) {
+        let value = e.target.value;
+        console.log(value);
+        this.setState({
+            bank: value
+        });
+    }
     render() {
         // stateを通して配列をmapして動的にVirtualDOMを作成し、list変数に格納
         let list = this.state.data.map((data) => (
             <li key={data.id}>
             {data.code}: {data.name}
+            <button
+            value={data.name}
+            onClick={this.handleClick}
+            >
+            選択する</button>
             </li>
         ));
         return (
             <div>
+                <input
+                    value={this.state.bank}
+                >
+                </input>
             {/* Selectコンポーネントを追加し、上記で定義したhandleFilterVal()メソッドを渡す */}
             <Select
                 kanaArrayOne={this.props.kanaArrayOne} onFilterVal={this.handleFilterVal.bind(this)}
