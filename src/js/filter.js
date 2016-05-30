@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import FilterApp from './components/Filter.js';
+import FilterBankApp from './components/FilterBank.js';
 
 // idとnameを持ったオブジェクトの配列を作成
 let data = [
@@ -15,5 +15,5 @@ let data = [
 
 ReactDOM.render(
   // 配列をAppコンポーネントに渡す
-  <FilterApp data={data} />, document.querySelector('.content')
+  <FilterBankApp data={data} />, document.querySelector('.content')
 );

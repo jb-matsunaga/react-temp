@@ -2,7 +2,8 @@ export default function() {
     let settings = {
         entry: {
             index: './src/js/index.js',
-            filter: './src/js/filter.js'
+            filter: './src/js/filter.js',
+            filterBank: './src/js/filterBank.js'
         },
         output: {
             path: __dirname,
