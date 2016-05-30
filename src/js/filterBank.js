@@ -33,42 +33,12 @@ let data = [
     }
 ];
 
-let kanaArray = [
-    {
-        id: 1,
-        prefix: 'あ',
-    },
-    {
-        id: 2,
-        prefix: 'い',
-    },
-    {
-        id: 3,
-        prefix: 'う',
-    },
-    {
-        id: 4,
-        prefix: 'え',
-    },
-    {
-        id: 5,
-        prefix: 'お',
-    }
-];
-
 let kanaArrayOne = [
     'あ','い','う','え','お',
     'か','き','く','け','こ'
 ];
 
-// ReactDOM.render(
-//   // 配列をAppコンポーネントに渡す
-//   <FilterBankApp data={data} kanaArray={kanaArray} />,
-//   document.querySelector('.content')
-// );
-
 ReactDOM.render(
-  // 配列をAppコンポーネントに渡す
   <FilterBankOneApp data={data} kanaArrayOne={kanaArrayOne} />,
   document.querySelector('.contentOne')
 );
