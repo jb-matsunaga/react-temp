@@ -1,7 +1,8 @@
 export default function() {
     let settings = {
         entry: {
-            index: './src/js/index.js'
+            index: './src/js/index.js',
+            filter: './src/js/filter.js'
         },
         output: {
             path: __dirname,
