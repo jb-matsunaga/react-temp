@@ -1,5 +1,4 @@
 import React from 'react';
-import update from 'react-addons-update';
 
 export default class FormValidation extends React.Component {
     constructor(props) {
@@ -41,10 +40,10 @@ export default class FormValidation extends React.Component {
             ]
         }
     }
-    handleChange(e) {
-        console.log(e);
+    handleChange(value) {
+        console.log(value);
         this.setState({
-            data: update(this.state.data, {1: {value: e.target.value}})
+            data: value
         })
     }
     render() {
@@ -61,16 +60,26 @@ export default class FormValidation extends React.Component {
 };
 
 class Input extends React.Component {
+    changeEvent(e) {
+        console.log(e.target.id);
+        let thisId = e.target.id;
+        let thisValue = e.target.value;
+        console.log('test');
+        this.props._handleChange({
+            id: thisId,
+            value: thisValue
+        });
+    }
 
     render() {
         return(
             <li>
                 <label>{this.props.data.label}</label>
                 <input
+                id={this.props.data.id}
                 type={this.props.data.type}
-                name={this.props.data.id}
                 value={this.props.data.value}
-                onChange={this.props._handleChange.bind(this)}
+                onChange={this.changeEvent.bind(this)}
                 />
             </li>
         );
