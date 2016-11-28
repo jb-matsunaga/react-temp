@@ -7,6 +7,7 @@ export default class FormValidation extends React.Component {
             data: [
                 {
                     id: '1',
+                    name: 'name',
                     label: 'お名前',
                     type: 'text',
                     value: '',
@@ -15,6 +16,7 @@ export default class FormValidation extends React.Component {
                 },
                 {
                     id: '2',
+                    name: 'email',
                     label: 'メールアドレス',
                     type: 'email',
                     value: '',
@@ -23,6 +25,7 @@ export default class FormValidation extends React.Component {
                 },
                 {
                     id: '3',
+                    name: 'tel',
                     label: '電話番号',
                     type: 'tel',
                     value: '',
@@ -31,6 +34,7 @@ export default class FormValidation extends React.Component {
                 },
                 {
                     id: '4',
+                    name: 'text',
                     label: '内容',
                     type: 'text',
                     value: '',
@@ -40,16 +44,19 @@ export default class FormValidation extends React.Component {
             ]
         }
     }
-    handleChange(value) {
-        console.log(value);
+    handleChange(array) {
+        console.log(this.state.data);
+        console.log(array);
+        const newArray = this.state.data.push(this.state.data, array);
+
         this.setState({
-            data: value
+            data: newArray
         })
     }
     render() {
         console.log(this.state.data);
         let inputs = this.state.data.map((data) => {
-            return <Input key={data.id} data={data} _handleChange={this.handleChange} />
+            return <Input key={data.id} data={data} _handleChange={this.handleChange.bind(this)} />
         })
         return(
             <ul>
@@ -61,14 +68,16 @@ export default class FormValidation extends React.Component {
 
 class Input extends React.Component {
     changeEvent(e) {
-        console.log(e.target.id);
         let thisId = e.target.id;
+        let thisName = e.target.name;
         let thisValue = e.target.value;
-        console.log('test');
-        this.props._handleChange({
-            id: thisId,
-            value: thisValue
-        });
+
+        //console.log(this.props.data);
+        this.props.data.value = thisValue;
+
+        let array = this.props.data;
+
+        this.props._handleChange(array);
     }
 
     render() {
@@ -77,6 +86,7 @@ class Input extends React.Component {
                 <label>{this.props.data.label}</label>
                 <input
                 id={this.props.data.id}
+                name={this.props.data.name}
                 type={this.props.data.type}
                 value={this.props.data.value}
                 onChange={this.changeEvent.bind(this)}
