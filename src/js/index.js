@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app.js';
-import FormApp from './components/FormValidation.js';
-import Form1App from './components/Form1App.js';
+import FormApp from './components/form/index.js';
 
 ReactDOM.render(
     <FormApp />,
