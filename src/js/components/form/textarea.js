@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class InputName extends React.Component {
+export default class InputTextArea extends React.Component {
     handleChange(e) {
         let name = e.target.name;
         let value = e.target.value;
@@ -17,10 +17,10 @@ export default class InputName extends React.Component {
     render() {
         return(
             <div>
-            <label>名前</label>
-                <input type="text" name="name" placeholder="名前"
+            <label>内容</label>
+                <textarea name="textarea" placeholder="内容" rows="20" 
                 value={this.props.data.value}
-                onChange={this.handleChange.bind(this)}/>
+                onChange={this.handleChange.bind(this)}></textarea>
                 <div>{this.props.data.value}</div>
                 <div>{this.props.data.error}</div>
             </div>

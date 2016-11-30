@@ -11,25 +11,24 @@ export default class InputEmail extends React.Component {
     handleChange(e) {
         let name = e.target.name;
         let value = e.target.value;
-        let error = '';
+        let error = null;
+        let flg = this.props.data.flg;
 
-        if(value.length >= 10) {
-            error = '10文字以内で入力してください。';
+        if(!value.match(/.+@.+\..+/)){
+            error = '正式なメールアドレスを入力してください。';
         }
-        this.setState({
-            value: value,
-            error: error
-        })
 
-        this.props._requiredCheck(name, value);
+        this.props._requiredCheck(name, value, error, flg);
     }
     render() {
         return(
             <div>
-            <label>メールアドレス</label>
-            <input type="email" value={this.state.value} name="email" placeholder="メール" onChange={this.handleChange.bind(this)}/>
-            <div>{this.state.value}</div>
-            <div>{this.state.error}</div>
+                <label>メールアドレス</label>
+                <input type="email" name="email" placeholder="メール"
+                value={this.props.data.value}
+                onChange={this.handleChange.bind(this)}/>
+                <div>{this.props.data.value}</div>
+                <div>{this.props.data.error}</div>
             </div>
         );
     }
