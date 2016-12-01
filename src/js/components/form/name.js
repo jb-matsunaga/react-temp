@@ -5,14 +5,17 @@ export default class InputName extends React.Component {
         let name = e.target.name;
         let value = e.target.value;
         let error = null;
-        let requeired = this.props.data.requeired;
         let flg = this.props.data.flg;
 
-        if(value.length >= 10) {
+        if(value) {
+            flg = true;
+        }
+        if(value.length > 10) {
             error = '10文字以内で入力してください。';
+            flg = false;
         }
 
-        this.props._requiredCheck(name, value, error, requeired, flg);
+        this.props._validationCheck(name, value, error, flg);
     }
     render() {
         return(

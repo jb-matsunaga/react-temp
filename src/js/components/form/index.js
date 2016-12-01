@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import InputName from './name.js';
 import InputMail from './email.js';
 import InputTextArea from './textarea.js';
@@ -25,12 +26,8 @@ export default class FormApp extends React.Component {
             disabled: true
         }
     }
-    RequiredCheck(name, value, error, flg) {
+    ValidationCheck(name, value, error, flg) {
         console.log(name, value, error, flg);
-
-        if(value) {
-            flg = true;
-        }
 
         this.setState({
             [name]: {
@@ -40,37 +37,45 @@ export default class FormApp extends React.Component {
             }
         })
     }
+    ResetFn() {
+        ReactDOM.findDOMNode(this.refs.form).reset();
+        console.log(this.refs.form);
+    }
     render() {
         let disabled = this.state.disabled;
         if(this.state.name.flg === true && this.state.email.flg === true) {
             disabled = null;
+        } else {
+            disabled = true;
         }
         return(
-            <form>
+            <form ref="form">
                 <ul>
                     <li>
-                        <InputName data={this.state.name} _requiredCheck={this.RequiredCheck.bind(this)} />
+                        <InputName data={this.state.name} _validationCheck={this.ValidationCheck.bind(this)} />
                     </li>
                     <li>
-                        <InputMail data={this.state.email} _requiredCheck={this.RequiredCheck.bind(this)} />
+                        <InputMail data={this.state.email} _validationCheck={this.ValidationCheck.bind(this)} />
                     </li>
                     <li>
-                        <InputTextArea data={this.state.textarea} _requiredCheck={this.RequiredCheck.bind(this)} />
+                        <InputTextArea data={this.state.textarea} _validationCheck={this.ValidationCheck.bind(this)} />
                     </li>
                 </ul>
                 <SubmitButton disabledFlg={disabled} />
+                <div>
+                    <button type="button" value="リセット" data={this.props.data} onClick={this.ResetFn.bind(this)}>リセット</button>
+                </div>
             </form>
         );
     }
 }
 
 class SubmitButton extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return(
+            <div>
             <button type="submit" value="送信" disabled={this.props.disabledFlg}>送信</button>
+            </div>
         );
     }
 }

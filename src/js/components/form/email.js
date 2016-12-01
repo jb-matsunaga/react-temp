@@ -12,13 +12,16 @@ export default class InputEmail extends React.Component {
         let name = e.target.name;
         let value = e.target.value;
         let error = null;
-        let flg = this.props.data.flg;
+        let flg = null;
 
         if(!value.match(/.+@.+\..+/)){
             error = '正式なメールアドレスを入力してください。';
+            flg = false;
+        } else {
+            flg = true;
         }
 
-        this.props._requiredCheck(name, value, error, flg);
+        this.props._validationCheck(name, value, error, flg);
     }
     render() {
         return(
