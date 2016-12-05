@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import InputName from './name.js';
-import InputMail from './email.js';
-import InputTextArea from './textarea.js';
+import InputName from './InputName.js';
+import InputMail from './InputMail.js';
+import SelectBox from './SelectBox.js';
+import TextArea from './TextArea.js';
 
-export default class FormApp extends React.Component {
+class SubmitButton extends React.Component {
+    render() {
+        return(
+            <div>
+            <button type="submit" value="送信" disabled={this.props.disabledFlg}>送信</button>
+            </div>
+        );
+    }
+}
+
+class FormApp extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             name: {
                 value: '',
@@ -18,6 +30,9 @@ export default class FormApp extends React.Component {
                 error: '',
                 flg: false
             },
+            select: {
+                value: 'three'
+            },
             textarea: {
                 value: '',
                 error: '',
@@ -25,6 +40,7 @@ export default class FormApp extends React.Component {
             },
             disabled: true
         }
+        this.ValidationCheck = this.ValidationCheck.bind(this);
     }
     ValidationCheck(name, value, error, flg) {
         console.log(name, value, error, flg);
@@ -52,16 +68,19 @@ export default class FormApp extends React.Component {
             <form ref="form">
                 <ul>
                     <li>
-                        <InputName data={this.state.name} _validationCheck={this.ValidationCheck.bind(this)} />
+                        <InputName key={this.props.name} data={this.state.name} _validationCheck={this.ValidationCheck} />
                     </li>
                     <li>
-                        <InputMail data={this.state.email} _validationCheck={this.ValidationCheck.bind(this)} />
+                        <InputMail key={this.props.email} data={this.state.email} _validationCheck={this.ValidationCheck} />
                     </li>
                     <li>
-                        <InputTextArea data={this.state.textarea} _validationCheck={this.ValidationCheck.bind(this)} />
+                        <SelectBox key={this.props.select} selected={this.state.select.value} _validationCheck={this.ValidationCheck}/>
+                    </li>
+                    <li>
+                        <TextArea key={this.props.textarea} data={this.state.textarea} _validationCheck={this.ValidationCheck} />
                     </li>
                 </ul>
-                <SubmitButton disabledFlg={disabled} />
+                <SubmitButton key={this.props.submit} disabledFlg={disabled} />
                 <div>
                     <button type="button" value="リセット" data={this.props.data} onClick={this.ResetFn.bind(this)}>リセット</button>
                 </div>
@@ -70,12 +89,12 @@ export default class FormApp extends React.Component {
     }
 }
 
-class SubmitButton extends React.Component {
-    render() {
-        return(
-            <div>
-            <button type="submit" value="送信" disabled={this.props.disabledFlg}>送信</button>
-            </div>
-        );
-    }
+FormApp.defaultProps = {
+    name: 'key-name',
+    email: 'key-email',
+    select: 'key-select',
+    textarea: 'key-textarea',
+    submit: 'key-submit'
 }
+
+module.exports = FormApp;

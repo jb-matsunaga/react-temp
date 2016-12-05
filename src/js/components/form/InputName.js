@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default class InputName extends React.Component {
+    constructor() {
+        super();
+        this.handleChange = this.handleChange.bind(this);
+    }
     handleChange(e) {
         let name = e.target.name;
         let value = e.target.value;
@@ -23,7 +27,7 @@ export default class InputName extends React.Component {
             <label>名前</label>
                 <input type="text" name="name" placeholder="名前"
                 value={this.props.data.value}
-                onChange={this.handleChange.bind(this)}/>
+                onChange={this.handleChange}/>
                 <div>{this.props.data.value}</div>
                 <div>{this.props.data.error}</div>
             </div>

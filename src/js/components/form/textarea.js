@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class InputTextArea extends React.Component {
+export default class TextArea extends React.Component {
     handleChange(e) {
         let name = e.target.name;
         let value = e.target.value;
